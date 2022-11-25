@@ -16,7 +16,7 @@ import java.util.List;
 public class EmpleadoDAO {
     public static Conexion c = new Conexion();
 
-    public static List<Empleado> dameUsuarios() {
+    public static List<Empleado> dameEmpleados() {
         Statement stm = null;
         ResultSet rs = null;
         List<Empleado> resultado = new ArrayList<>();
@@ -61,7 +61,7 @@ public class EmpleadoDAO {
             }
             try {
                 cc.close();
-                System.out.println("Closed  connection!");
+                System.out.println("Conexion terminada :D");
             } catch (SQLException sqlEx) {
                 sqlEx.printStackTrace();
             }
