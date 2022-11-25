@@ -14,6 +14,7 @@ public class EmpleadoWS {
        // System.out.println( "Hello World!" );
         port(80);
 
+        
         options("/*", (request, response) -> {
             String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
             if (accessControlRequestHeaders != null) {
@@ -26,13 +27,19 @@ public class EmpleadoWS {
             return "OK";
         });
         before((req, res) -> res.header("Access-Control-Allow-Origin", "*"));
+
+        System.out.println("Hello World!");
         before((req, res) -> res.type("application/json"));
         
-
         get("/empleados", (req, res) -> gson.toJson(EmpleadoDAO.dameEmpleados()));
 
         
+        //empleadosEnJson();
+        
     }
+   
+    
+    
 
 
     
