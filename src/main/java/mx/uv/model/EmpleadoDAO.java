@@ -70,5 +70,55 @@ public class EmpleadoDAO {
         return resultado;
     }
 
+
+    public static String actualizaUsuario(Empleado u) {
+        PreparedStatement stm = null;
+        //UPDATE `ejemplo80640`.`usuario` SET `id` = '4', `username` = 'alexis', `password` = '123456' WHERE (`id` = '3');
+        Connection cc = null;
+        String msj = "";
+
+        cc = c.getConnection();
+        try {
+            String sql = "UPDATE empleado SET idEmpleado = ?, nombre = ?, apellidoPaterno = ?,apellidoMaterno = ?,correoElectronico = ?, direccion = ?, telefono = ?, password = ?,estatus = ?,idRol = ? WHERE (idEmpleado = ?)";
+            stm = (PreparedStatement) cc.prepareStatement(sql);
+            stm.setInt(1, u.getIdEmpleado());
+            stm.setString(2, u.getNombre());
+            stm.setString(3, u.getApellidoPaterno());
+            stm.setString(4, u.getApellidoMaterno());
+            stm.setString(5, u.getCorreoElectronico());
+            stm.setString(6, u.getDireccion());
+            stm.setString(7, u.getTelefono());
+            stm.setString(8, u.getPassword());
+            stm.setInt(9, u.getEstatus());
+            stm.setInt(10, u.getIdRol());
+
+            if (stm.executeUpdate() > 0)
+                msj = "Empleado agregado correctamente";
+            else
+                msj = "Algo salio mal. El empleado no se pudo agregar";
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            // vamos a liberar en este bloque todos los recursos empleando
+            // se hace en orden inverso a su creación
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException sqlEx) {
+                    sqlEx.printStackTrace();
+                }
+                stm = null;
+            }
+            try {
+                cc.close();
+                System.out.println("Closed  connection!");
+            } catch (SQLException sqlEx) {
+                sqlEx.printStackTrace();
+            }
+        }
+
+        return msj;
+    }
+
     
 }
