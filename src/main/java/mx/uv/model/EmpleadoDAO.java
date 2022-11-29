@@ -33,8 +33,7 @@ public class EmpleadoDAO {
                         rs.getString("nombre"), rs.getString("apellidoPaterno"),
                         rs.getString("apellidoMaterno"),rs.getString("correoElectronico"),
                         rs.getString("direccion"), rs.getString("telefono"),
-                        rs.getString("password"), rs.getInt("estatus"),
-                        rs.getInt("idRol"));
+                        rs.getString("password"), rs.getString("estatus"));
                 resultado.add(e);
             }
         } catch (Exception e) {
@@ -79,7 +78,7 @@ public class EmpleadoDAO {
 
         cc = c.getConnection();
         try {
-            String sql = "UPDATE empleado SET idEmpleado = ?, nombre = ?, apellidoPaterno = ?,apellidoMaterno = ?,correoElectronico = ?, direccion = ?, telefono = ?, password = ?,estatus = ?,idRol = ? WHERE (idEmpleado = ?)";
+            String sql = "UPDATE empleado SET idEmpleado = ?, nombre = ?, apellidoPaterno = ?,apellidoMaterno = ?,correoElectronico = ?, direccion = ?, telefono = ?, password = ?,estatus = ? WHERE (idEmpleado = ?)";
             stm = (PreparedStatement) cc.prepareStatement(sql);
             stm.setInt(1, u.getIdEmpleado());
             stm.setString(2, u.getNombre());
@@ -89,8 +88,8 @@ public class EmpleadoDAO {
             stm.setString(6, u.getDireccion());
             stm.setString(7, u.getTelefono());
             stm.setString(8, u.getPassword());
-            stm.setInt(9, u.getEstatus());
-            stm.setInt(10, u.getIdRol());
+            stm.setString(9, u.getEstatus());
+           
 
             if (stm.executeUpdate() > 0)
                 msj = "Empleado agregado correctamente";
@@ -101,6 +100,51 @@ public class EmpleadoDAO {
         } finally {
             // vamos a liberar en este bloque todos los recursos empleando
             // se hace en orden inverso a su creación
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException sqlEx) {
+                    sqlEx.printStackTrace();
+                }
+                stm = null;
+            }
+            try {
+                cc.close();
+                System.out.println("Closed  connection!");
+            } catch (SQLException sqlEx) {
+                sqlEx.printStackTrace();
+            }
+        }
+
+        return msj;
+    }
+
+    public static String crearEmpleado(Empleado u) {
+        PreparedStatement stm = null;
+        Connection cc = null;
+        String msj = "";
+
+        cc = c.getConnection();
+        try {
+            String sql = "INSERT INTO empleado (nombre, apellidoPaterno,apellidoMaterno,correoElectronico,direccion,telefono,password,estatus) VALUES (?,?,?,?,?,?,?,?)";
+            stm = (PreparedStatement) cc.prepareStatement(sql);
+            //stm.setInt(1, u.getIdEmpleado());
+            stm.setString(1, u.getNombre());
+            stm.setString(2, u.getApellidoPaterno());
+            stm.setString(3, u.getApellidoMaterno());
+            stm.setString(4, u.getCorreoElectronico());
+            stm.setString(5, u.getDireccion());
+            stm.setString(6, u.getTelefono());
+            stm.setString(7, u.getPassword());
+            stm.setString(8, u.getEstatus());
+
+            if (stm.executeUpdate() > 0)
+                msj = "Empleado agregado correctamente";
+            else
+                msj = "Algo salio mal, empleado no agregado";
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
             if (stm != null) {
                 try {
                     stm.close();

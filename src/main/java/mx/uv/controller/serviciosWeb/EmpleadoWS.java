@@ -1,5 +1,6 @@
 package mx.uv.controller.serviciosWeb;
 
+import mx.uv.model.Empleado;
 import mx.uv.model.EmpleadoDAO;
 import static spark.Spark.*;
 import com.google.gson.Gson;
@@ -33,7 +34,12 @@ public class EmpleadoWS {
         
         get("/empleados", (req, res) -> gson.toJson(EmpleadoDAO.dameEmpleados()));
 
-        
+        post("/", (req, res) -> {
+            String datosFormulario = req.body();
+            Empleado u = gson.fromJson(datosFormulario, Empleado.class);
+            
+            return EmpleadoDAO.crearEmpleado(u);
+        });
         
         //empleadosEnJson();
         
