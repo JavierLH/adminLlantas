@@ -12,7 +12,7 @@ public class App {
     public static void main( String[] args )
     {
        // System.out.println( "Hello World!" );
-        port(80);
+        port(1024);
 
         options("/*", (request, response) -> {
             String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");

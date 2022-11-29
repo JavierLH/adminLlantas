@@ -10,18 +10,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
-
 
 public class EmpleadoDAO {
     public static Conexion c = new Conexion();
-
     public static List<Empleado> dameEmpleados() {
         Statement stm = null;
         ResultSet rs = null;
         List<Empleado> resultado = new ArrayList<>();
         Connection cc = null;
-
         // falto conectarme
         cc = c.getConnection();
         try {
@@ -39,8 +35,6 @@ public class EmpleadoDAO {
         } catch (Exception e) {
             System.out.println(e);
         } finally {
-            // vamos a liberar en este bloque todos los recursos empleando
-            // se hace en orden inverso a su creación
             if (rs != null) {
                 try {
                     rs.close();
@@ -49,7 +43,6 @@ public class EmpleadoDAO {
                 }
                 rs = null;
             }
-
             if (stm != null) {
                 try {
                     stm.close();
@@ -65,7 +58,6 @@ public class EmpleadoDAO {
                 sqlEx.printStackTrace();
             }
         }
-
         return resultado;
     }
 
@@ -75,7 +67,6 @@ public class EmpleadoDAO {
         //UPDATE `ejemplo80640`.`usuario` SET `id` = '4', `username` = 'alexis', `password` = '123456' WHERE (`id` = '3');
         Connection cc = null;
         String msj = "";
-
         cc = c.getConnection();
         try {
             String sql = "UPDATE empleado SET idEmpleado = ?, nombre = ?, apellidoPaterno = ?,apellidoMaterno = ?,correoElectronico = ?, direccion = ?, telefono = ?, password = ?,estatus = ? WHERE (idEmpleado = ?)";
@@ -89,8 +80,7 @@ public class EmpleadoDAO {
             stm.setString(7, u.getTelefono());
             stm.setString(8, u.getPassword());
             stm.setString(9, u.getEstatus());
-           
-
+        
             if (stm.executeUpdate() > 0)
                 msj = "Empleado agregado correctamente";
             else
@@ -98,8 +88,6 @@ public class EmpleadoDAO {
         } catch (Exception e) {
             System.out.println(e);
         } finally {
-            // vamos a liberar en este bloque todos los recursos empleando
-            // se hace en orden inverso a su creación
             if (stm != null) {
                 try {
                     stm.close();
@@ -115,7 +103,6 @@ public class EmpleadoDAO {
                 sqlEx.printStackTrace();
             }
         }
-
         return msj;
     }
 
@@ -128,7 +115,6 @@ public class EmpleadoDAO {
         try {
             String sql = "INSERT INTO empleado (nombre, apellidoPaterno,apellidoMaterno,correoElectronico,direccion,telefono,password,estatus) VALUES (?,?,?,?,?,?,?,?)";
             stm = (PreparedStatement) cc.prepareStatement(sql);
-            //stm.setInt(1, u.getIdEmpleado());
             stm.setString(1, u.getNombre());
             stm.setString(2, u.getApellidoPaterno());
             stm.setString(3, u.getApellidoMaterno());
@@ -160,9 +146,6 @@ public class EmpleadoDAO {
                 sqlEx.printStackTrace();
             }
         }
-
         return msj;
-    }
-
-    
+    } 
 }

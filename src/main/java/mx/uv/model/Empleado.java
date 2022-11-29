@@ -25,10 +25,8 @@ public class Empleado {
         this.telefono = telefono;
         this.password = password;
         this.estatus = estatus;
-        
+
     }
-
-
 
     public Integer getIdEmpleado() {
         return idEmpleado;
@@ -84,10 +82,4 @@ public class Empleado {
     public void setEstatus(String estatus) {
         this.estatus = estatus;
     }
-   
-
-
-
-    
-    
 }

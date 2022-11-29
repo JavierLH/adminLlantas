@@ -5,17 +5,10 @@ import mx.uv.model.EmpleadoDAO;
 import static spark.Spark.*;
 import com.google.gson.Gson;
 
-
-
 public class EmpleadoWS {
-
     public static Gson gson = new Gson();
-    public static void main( String[] args )
-    {
-       // System.out.println( "Hello World!" );
-        port(80);
-
-        
+    public static void main( String[] args ){
+        port(1024);
         options("/*", (request, response) -> {
             String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
             if (accessControlRequestHeaders != null) {
@@ -28,27 +21,13 @@ public class EmpleadoWS {
             return "OK";
         });
         before((req, res) -> res.header("Access-Control-Allow-Origin", "*"));
-
         System.out.println("Hello World!");
         before((req, res) -> res.type("application/json"));
-        
         get("/empleados", (req, res) -> gson.toJson(EmpleadoDAO.dameEmpleados()));
-
         post("/", (req, res) -> {
             String datosFormulario = req.body();
             Empleado u = gson.fromJson(datosFormulario, Empleado.class);
-            
             return EmpleadoDAO.crearEmpleado(u);
         });
-        
-        //empleadosEnJson();
-        
     }
-   
-    
-    
-
-
-    
-    
 }
