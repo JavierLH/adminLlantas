@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class EmpleadoDAO {
     public static Conexion c = new Conexion();
+    
     public static List<Empleado> dameEmpleados() {
         Statement stm = null;
         ResultSet rs = null;
@@ -21,7 +22,7 @@ public class EmpleadoDAO {
         // falto conectarme
         cc = c.getConnection();
         try {
-            String sql = "SELECT * FROM empleado";
+            String sql = "SELECT * FROM usuario WHERE idRol =1";
             stm = (Statement) cc.createStatement();
             rs = stm.executeQuery(sql);
             while (rs.next()) {
@@ -29,7 +30,8 @@ public class EmpleadoDAO {
                         rs.getString("nombre"), rs.getString("apellidoPaterno"),
                         rs.getString("apellidoMaterno"),rs.getString("correoElectronico"),
                         rs.getString("direccion"), rs.getString("telefono"),
-                        rs.getString("password"), rs.getString("estatus"));
+                        rs.getString("password"), rs.getString("estatus"),
+                        rs.getString("rol"));
                 resultado.add(e);
             }
         } catch (Exception e) {
@@ -62,16 +64,15 @@ public class EmpleadoDAO {
     }
 
 
-    public static String actualizaUsuario(Empleado u) {
+    public static String actualizaEmpleado(Empleado u) {
         PreparedStatement stm = null;
         //UPDATE `ejemplo80640`.`usuario` SET `id` = '4', `username` = 'alexis', `password` = '123456' WHERE (`id` = '3');
         Connection cc = null;
         String msj = "";
         cc = c.getConnection();
         try {
-            String sql = "UPDATE empleado SET idEmpleado = ?, nombre = ?, apellidoPaterno = ?,apellidoMaterno = ?,correoElectronico = ?, direccion = ?, telefono = ?, password = ?,estatus = ? WHERE (idEmpleado = ?)";
+            String sql = "UPDATE usuario SET  nombre = ?, apellidoPaterno = ?,apellidoMaterno = ?,correoElectronico = ?, direccion = ?, telefono = ?, password = ?,estatus = ? WHERE (idEmpleado = ?)";
             stm = (PreparedStatement) cc.prepareStatement(sql);
-            stm.setInt(1, u.getIdEmpleado());
             stm.setString(2, u.getNombre());
             stm.setString(3, u.getApellidoPaterno());
             stm.setString(4, u.getApellidoMaterno());
@@ -82,9 +83,9 @@ public class EmpleadoDAO {
             stm.setString(9, u.getEstatus());
         
             if (stm.executeUpdate() > 0)
-                msj = "Empleado agregado correctamente";
+                msj = "Datos del empleado modificados correctamente";
             else
-                msj = "Algo salio mal. El empleado no se pudo agregar";
+                msj = "Algo salio mal. No se pueden modificar los datos del empleado";
         } catch (Exception e) {
             System.out.println(e);
         } finally {
@@ -113,7 +114,7 @@ public class EmpleadoDAO {
 
         cc = c.getConnection();
         try {
-            String sql = "INSERT INTO empleado (nombre, apellidoPaterno,apellidoMaterno,correoElectronico,direccion,telefono,password,estatus) VALUES (?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO usuario (nombre, apellidoPaterno,apellidoMaterno,correoElectronico,direccion,telefono,password,estatus,idRol) VALUES (?,?,?,?,?,?,?,?,?)";
             stm = (PreparedStatement) cc.prepareStatement(sql);
             stm.setString(1, u.getNombre());
             stm.setString(2, u.getApellidoPaterno());
@@ -123,6 +124,7 @@ public class EmpleadoDAO {
             stm.setString(6, u.getTelefono());
             stm.setString(7, u.getPassword());
             stm.setString(8, u.getEstatus());
+            stm.setString(9, u.getIdRol());
 
             if (stm.executeUpdate() > 0)
                 msj = "Empleado agregado correctamente";

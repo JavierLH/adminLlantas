@@ -10,12 +10,14 @@ public class Empleado {
     private String telefono;
     private String password;
     private String estatus;
+    private String idRol;
 
+    
     public Empleado(){
 
     }
     public Empleado(Integer idEmpleado, String nombre, String apellidoPaterno, String apellidoMaterno,
-            String correoElectronico, String direccion, String telefono, String password, String estatus) {
+            String correoElectronico, String direccion, String telefono, String password, String estatus,String idRol) {
         this.idEmpleado = idEmpleado;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -25,6 +27,7 @@ public class Empleado {
         this.telefono = telefono;
         this.password = password;
         this.estatus = estatus;
+        this.idRol = idRol;
 
     }
 
@@ -81,5 +84,12 @@ public class Empleado {
     }
     public void setEstatus(String estatus) {
         this.estatus = estatus;
+    }
+
+    public String getIdRol() {
+        return idRol;
+    }
+    public void setIdRol(String idRol) {
+        this.idRol = idRol;
     }
 }

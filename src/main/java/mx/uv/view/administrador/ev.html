@@ -14,7 +14,7 @@
         <div class="card">
             <div class="card-header">
                 <h1>Administrar empleados</h1>
-                <button id="btn" type="button" onclick="btn_menu()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Regresar</button>
+                <button id="btndistinto" type="button" onclick="btn_menu()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Regresar</button>
                 <button id="btn" type="button"  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Nuevo empleado </button>
             </div> 
         
@@ -37,7 +37,7 @@
                     </tbody>
                 </table>
             </div>
-             <!-- codigo del modal-->
+             <!-- codigo del modal agregar empleado-->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
@@ -80,7 +80,14 @@
                             <div class="mb-3">
                                 <label for="" class="form-label">Estatus</label>
                                 <input type="text" class="form-control" id="estatusEmpleado">
-                             </div>                    
+                             </div> 
+                             <div class="mb-3">
+                              <label for="" class="form-label">Rol</label>
+                              <input type="text" class="form-control" id="estatusEmpleado">
+
+                           </div>        
+                           <div id="emailHelp" class="form-text">
+                            0 para administrador y 1 para empleado.</div>            
                             
                           </form>
                     </div>
@@ -92,6 +99,62 @@
                 </div>
               </div>
 
+              <!-- codigo del modal editar empleado-->
+              <div class="modal fade" id="editar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Editar empleado</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post">
+                            <div class="mb-3">
+                              <label for="" class="form-label">Nombre</label>
+                              <input type="text" class="form-control" id="nombreEmpleado">
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Apellido paterno</label>
+                                <input type="text" class="form-control" id="aPEmpleado">
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Apellido materno</label>
+                                <input type="text" class="form-control" id="aMEmpleado">
+                              </div>
+                            <div class="mb-3">
+                              <label for="" class="form-label">Correro electrónico</label>
+                              <input type="email" class="form-control" id="cEEmpleado" aria-describedby="emailHelp">
+                              <div id="emailHelp" class="form-text">
+                                Nunca compartiremos su correo electrónico con nadie más.</div>
+                            </div>
+                            <div class="mb-3">
+                              <label for="" class="form-label">Dirección</label>
+                              <input type="text" class="form-control" id="dirEmpleado">
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Teléfono</label>
+                                <input type="text" class="form-control" id="telEmpleado">
+                              </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="passEmpleado">
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Estatus</label>
+                                <input type="text" class="form-control" id="estatusEmpleado">
+                             </div>                    
+                            
+                          </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                      <button id="enviarEmpleado" type="button" class="btn btn-primary" onclick="mostrarAlertaEditar()" >Guardar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+          
         <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>   
@@ -112,32 +175,32 @@
     </script>
     </div> 
 </body>
+
+
 <script>
-    
-   
     var users;
     const tabla = document.querySelector('#cuerpo');
     const opciones ={
       method :'POST'
 
     }
-    axios.get('http://localhost:1024/empleados')
+    axios.get('http://localhost/empleados')
     .then(response => {
       users = response.data;  
       users.forEach(element => {
         tabla.innerHTML += `
-                    <td scope="row">${element.nombre}</td>
-                    <td>${element.apellidoPaterno}</td>
-                    <td>${element.apellidoMaterno}</td>
-                    <td>${element.correoElectronico}</td>
-                    <td>${element.direccion}</td>
-                    <td>${element.telefono}</td>
-                    <td >${element.password}</td>
-                    <td>${element.estatus}</td>
+                    <td scope="row" id="nom">${element.nombre}</td>
+                    <td id="ap">${element.apellidoPaterno}</td>
+                    <td id="am">${element.apellidoMaterno}</td>
+                    <td id="ce">${element.correoElectronico}</td>
+                    <td id="dir">${element.direccion}</td>
+                    <td id="tel">${element.telefono}</td>
+                    <td id="pas">${element.password}</td>
+                    <td id="es">${element.estatus}</td>
                     
                     <td> 
-                      <button class="btn btn-warning " style="width: 100%;">Editar</button>
-                      <button class="btn btn-danger" style="width: 100%;" >Eliminar</button>
+                      <button id="ed" class="btn btn-warning " style="width: 100%;" data-bs-toggle="modal" data-bs-target="#editar">Editar</button>
+                      <button class="btn btn-danger" style="width: 100%;" data-bs-toggle="modal" data-bs-target="#eliminar" >Eliminar</button>
                   </td>
   
         ` 
@@ -147,6 +210,7 @@
   .catch(e => {
       console.log(e);
   })
+
 
   $(document).ready( function () {
     $('#tbDatosEmpleado').DataTable(
@@ -168,21 +232,14 @@
 } );
 
 
-function mostrarAlerta(){
-  swal({
-  title: "Listo",
-  text: "Empleado agregado correctamente",
-  icon: "success",
-  button: "Aceptar",
-});
-}
-
   </script>
 
 <script>
     var bEnviar = document.getElementById("enviarEmpleado");
     bEnviar.addEventListener ("click", function () {
         let nombre = document.getElementById ("nombreEmpleado").value;
+        //let sa = document ("nombreEmpleado").value;
+
         let apellidoPaterno = document.getElementById ("aPEmpleado").value;
         let apellidoMaterno= document.getElementById ("aMEmpleado").value;
         let correoElectronico = document.getElementById ("cEEmpleado").value;
@@ -190,7 +247,7 @@ function mostrarAlerta(){
         let telefono = document.getElementById ("telEmpleado").value;
         let password= document.getElementById ("passEmpleado").value;
         let estatus = document.getElementById ("estatusEmpleado").value;
-        axios.post("http://localhost:1024/", {
+        axios.post("http://localhost/", {
             nombre : nombre,
             apellidoPaterno: apellidoPaterno,
             apellidoMaterno: apellidoMaterno,
@@ -207,9 +264,29 @@ function mostrarAlerta(){
             console.log(error)
         })
     })
-    
+
+
+  
+    function mostrarAlertaAgregar(){
+      swal({
+      title: "Listo",
+      text: "Empleado agregado correctamente",
+      icon: "success",
+      button: "Aceptar",
+      
+    });
+  }
+
+  function mostrarAlertaEditar(){
+      swal({
+      title: "Listo",
+      text: "Los datos del empleado han sido editados correctamente",
+      icon: "success",
+      button: "Aceptar",
+      
+    });
+  }
 </script>
 
-<script src="/target/classes/mx/uv/controller/script.js"></script>  
 
 </html>

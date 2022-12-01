@@ -8,7 +8,7 @@ import com.google.gson.Gson;
 public class EmpleadoWS {
     public static Gson gson = new Gson();
     public static void main( String[] args ){
-        port(1024);
+        port(80);
         options("/*", (request, response) -> {
             String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
             if (accessControlRequestHeaders != null) {
@@ -24,10 +24,20 @@ public class EmpleadoWS {
         System.out.println("Hello World!");
         before((req, res) -> res.type("application/json"));
         get("/empleados", (req, res) -> gson.toJson(EmpleadoDAO.dameEmpleados()));
+
         post("/", (req, res) -> {
             String datosFormulario = req.body();
             Empleado u = gson.fromJson(datosFormulario, Empleado.class);
             return EmpleadoDAO.crearEmpleado(u);
         });
+
+        put("/", (req, res) -> {
+            String datosFormulario = req.body();
+            Empleado u = gson.fromJson(datosFormulario, Empleado.class);
+            return EmpleadoDAO.actualizaEmpleado(u);
+        });
+
+
+
     }
 }
