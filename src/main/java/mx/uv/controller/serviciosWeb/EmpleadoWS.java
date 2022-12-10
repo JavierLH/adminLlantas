@@ -40,14 +40,15 @@ public class EmpleadoWS {
             return EmpleadoDAO.actualizaEmpleado(u);
         });
 
-        delete("/elimina", (req, res) -> {
+        post("/elimina", (req, res) -> {
             String datosFormulario = req.body();
-            //Integer idSeleccioando = req.e.target.parentElement.parentElement.children[0].textContent
             Empleado u = gson.fromJson(datosFormulario, Empleado.class);
-            return EmpleadoDAO.eliminaEmpleado(u);
+            return EmpleadoDAO.actualizaEmpleado(u);
         });
 
-        get("/obtenerUsuario", (req, res) -> gson.toJson(LoginDAO.dameUsuarios()));
+        
+
+        //get("/obtenerUsuario", (req, res) -> gson.toJson(LoginDAO.dameUsuarios()));
 
     }
 }

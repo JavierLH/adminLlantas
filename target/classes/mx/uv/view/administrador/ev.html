@@ -22,7 +22,7 @@
                 <table id="tbDatosEmpleado" class="table table-dark table-striped">
                     <thead>
                     <tr>
-                      <th scope="col">ID</th>
+                      
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellido Paterno</th>
                         <th scope="col">Apellido Materno</th>
@@ -143,7 +143,63 @@
                   </div>
                 </div>
               </div>
+              
+              <!-- codigo del modal eliminar empleado-->
+              <div class="modal fade" id="eliminar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Editar empleado</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post">
+                            <div class="mb-3">
+                              <label for="" class="form-label">Nombre</label>
+                              <input type="text" class="form-control" name="delete" id="nombreEmpleadoE">
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Apellido paterno</label>
+                                <input type="text" class="form-control" name="delete" id="aPEmpleadoE">
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Apellido materno</label>
+                                <input type="text" class="form-control" name="delete" id="aMEmpleadoE">
+                              </div>
+                            <div class="mb-3">
+                              <label for="" class="form-label">Correro electrónico</label>
+                              <input type="email" class="form-control" name="delete" aria-describedby="emailHelp" id="cEEmpleadoE">
+                              <div id="emailHelp" class="form-text">
+                                Nunca compartiremos su correo electrónico con nadie más.</div>
+                            </div>
+                            <div class="mb-3">
+                              <label for="" class="form-label">Dirección</label>
+                              <input type="text" class="form-control" name="delete"  id="dirEmpleadoE">
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Teléfono</label>
+                                <input type="text" class="form-control" name="delete" id="telEmpleadoE">
+                              </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Password</label>
+                                <input type="password" class="form-control" name="delete" id="passEmpleadoE">
+                            </div>
 
+                            <div class="mb-3">
+                              <label for="" class="form-label">estatus</label>
+                              <input type="text" class="form-control" name="delete" id="estatusEmpleadoE">
+                          </div>
+                                               
+                            
+                          </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                      <button id="enviarEmpleadoEliminar" type="button" class="btn btn-primary" >Guardar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
           
         <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
@@ -181,7 +237,7 @@
       users.forEach(element => {
         tabla.innerHTML += `
                   <tr>
-                    <td id="idUser">${element.idEmpleado}</td>
+                    
                     <td scope="row">${element.nombre}</td>
                     <td id="ap">${element.apellidoPaterno}</td>
                     <td id="am">${element.apellidoMaterno}</td>
@@ -192,8 +248,8 @@
                     <td id="es">${element.estatus}</td>
                   
                     <th> 
-                      <button id="ed" class="btn btn-warning " style="width: 100%;" data-bs-toggle="modal" data-bs-target="#editar">Editar</button>
-                      <button id="deleteEmpleado" class="btn btn-danger" style="width: 100%;">Eliminar</button>
+                      <button class="btn btn-warning " style="width: 100%;" data-bs-toggle="modal" data-bs-target="#editar">Editar</button>
+                      <button id="botonEliminar" class="btn btn-danger" style="width: 100%;" data-bs-toggle="modal" data-bs-target="#eliminar">Eliminar</button>
                     </th>
                   </tr> 
   
@@ -257,6 +313,34 @@ window.addEventListener('click',(e)=>{
     cont=0
   }
 })
+
+//verificar datos eliminar
+const datosTabla1 = document.getElementById('tbDatosEmpleado')
+//const datosTabla = document.querySelector('#cuerpo');
+const modalEditarEmpleado1 = document.getElementById('editar')
+const inputs1 = document.getElementsByName('delete')
+ let cont1 = 0
+let index1 =1
+
+window.addEventListener('click',(e)=>{
+  if (e.target.matches(".btn-danger")) {
+    let data1 =e.target.parentElement.parentElement.children;
+  //modalEditarEmpleado .classList.toggle('translate')
+  //fillData(data)
+    for (index1 of inputs1) {   
+      index1.value = data1[cont1].textContent
+      console.log(index1)
+      cont1+=1  
+    }
+  }
+  if (e.target.matches(".btn-secondary")) {
+    cont=0
+  }
+  if (e.target.matches(".btn-close")) {
+    cont=0
+  }
+})
+
   //codigo para agregar nuevo empleado 
     var bEnviar = document.getElementById("enviarEmpleado");
     bEnviar.addEventListener ("click", function () {
@@ -268,7 +352,7 @@ window.addEventListener('click',(e)=>{
         let telefono = document.getElementById ("telEmpleadoA").value;
         let password= document.getElementById ("passEmpleadoA").value;
         //let estatus = document.getElementById ("estatusEmpleadoA").value;
-        let estatus ="1"
+        let estatus ="2"
         let idRol ="1"
         if (nombre !="" && apellidoPaterno !="" && apellidoMaterno!="" && correoElectronico!="" && direccion!="" && telefono!="" && password!="" && estatus!="" ) {
           
@@ -310,7 +394,7 @@ window.addEventListener('click',(e)=>{
         let telefono = document.getElementById ("telEmpleado").value;
         let password= document.getElementById ("passEmpleado").value;
         //let estatus = document.getElementById ("estatusEmpleadoA").value;
-        let estatus ="1"
+        let estatus ="2"
         let idRol ="1"
         if (nombre !="" && apellidoPaterno !="" && apellidoMaterno!="" && correoElectronico!="" && direccion!="" && telefono!="" && password!="" && estatus!="" ) {
           
@@ -341,34 +425,45 @@ window.addEventListener('click',(e)=>{
     })
 
     //codigo para eliminar un empleado 
-
-  const datosTabla1 = document.getElementById('tbDatosEmpleado')
-  //let id = document.getElementById('idUser')
-  datosTabla1.addEventListener('click',(e)=>{
-    console.log(e.target.parentElement.parentElement.children[0].textContent)//aqui obtengo el id cada vez que doy clic en el boton
-
-   
-  })
-
-    var btEliminar = document.getElementById("deleteEmpleado");
+    var btEliminar = document.getElementById("enviarEmpleadoEliminar");
     btEliminar.addEventListener ("click", function () {
-      let idEmpleado = document.getElementById ("nombreEmpleado").value;
+        let nombre = document.getElementById ("nombreEmpleadoE").value;
+        let apellidoPaterno = document.getElementById ("aPEmpleadoE").value;
+        let apellidoMaterno= document.getElementById ("aMEmpleadoE").value;
+        let correoElectronico = document.getElementById ("cEEmpleadoE").value;
+        let direccion = document.getElementById ("dirEmpleadoE").value;
+        let telefono = document.getElementById ("telEmpleadoE").value;
+        let password= document.getElementById ("passEmpleadoE").value;
+        //let estatus = document.getElementById ("estatusEmpleadoE").value;
+        let estatus ="2"
+        let idRol ="1"
+        //if (nombre !="" && apellidoPaterno !="" && apellidoMaterno!="" && correoElectronico!="" && direccion!="" && telefono!="" && password!="" && estatus!="" ) {
+          
         
           axios.post("http://localhost/elimina", {
-             idEmpleado:idEmpleado
-              
+              nombre : nombre,
+              apellidoPaterno: apellidoPaterno,
+              apellidoMaterno: apellidoMaterno,
+              correoElectronico: correoElectronico,
+              direccion: direccion,
+              telefono: telefono,
+              password : password,
+              estatus: estatus,
+              idRol:idRol
           })
           .then (function (respuesta) {
               console.log(respuesta)
-              mostrarAlertaEliminar()
+              mostrarAlertaEditar()
           })
           .catch(function (error) {
               console.log(error)
               //mostrarAlertaAgregarCorrecto()
           })
-        
-    })
+        //}else{
+          // mostrarAlertaAgregarError()
 
+        //}
+    })
 
   
     function mostrarAlertaAgregarCorrecto(){

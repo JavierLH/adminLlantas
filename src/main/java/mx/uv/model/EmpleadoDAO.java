@@ -71,7 +71,7 @@ public class EmpleadoDAO {
         String msj = "";
         cc = c.getConnection();
         try {
-            String sql = "UPDATE usuario SET  nombre = ?, apellidoPaterno = ?,apellidoMaterno = ?,correoElectronico = ?, direccion = ?, telefono = ?, password = ? WHERE (ID = ?)";
+            String sql = "UPDATE usuario SET  nombre = ?, apellidoPaterno = ?,apellidoMaterno = ?,correoElectronico = ?, direccion = ?, telefono = ?, password = ?, estatus=? WHERE (ID = ?)";
             stm = (PreparedStatement) cc.prepareStatement(sql);
             stm.setString(1, u.getNombre());
             stm.setString(2, u.getApellidoPaterno());
@@ -168,6 +168,45 @@ public class EmpleadoDAO {
                 msj = "Datos del empleado eliminados correctamente";
             else
                 msj = "Algo salio mal. No se pueden eliminar el empleado";
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException sqlEx) {
+                    sqlEx.printStackTrace();
+                }
+                stm = null;
+            }
+            try {
+                cc.close();
+                System.out.println("Closed  connection!");
+            } catch (SQLException sqlEx) {
+                sqlEx.printStackTrace();
+            }
+        }
+        return msj;
+    }
+
+
+    public static String emininaPostEmpleado(Empleado u) {
+        PreparedStatement stm = null;
+        //UPDATE `ejemplo80640`.`usuario` SET `id` = '4', `username` = 'alexis', `password` = '123456' WHERE (`id` = '3');
+        Connection cc = null;
+        String msj = "";
+        cc = c.getConnection();
+        try {
+            String sql = "UPDATE usuario SET estatus = ? WHERE (ID = ?)";
+            stm = (PreparedStatement) cc.prepareStatement(sql);
+            stm.setInt(1, u.getIdEmpleado());
+            stm.setString(2, u.getEstatus());
+            //stm.setString(9, u.getEstatus());
+        
+            if (stm.executeUpdate() > 0)
+                msj = "Datos del empleado eliminados correctamente";
+            else
+                msj = "Algo salio mal. No se puede eliminar los datos del empleado";
         } catch (Exception e) {
             System.out.println(e);
         } finally {
