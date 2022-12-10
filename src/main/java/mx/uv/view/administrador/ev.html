@@ -53,33 +53,33 @@
                         <form>
                             <div class="mb-3">
                               <label for="" class="form-label">Nombre</label>
-                              <input type="text" class="form-control" id="nombreEmpleadoA">
+                              <input type="text" class="form-control" id="nombreEmpleadoA" aria-label="ingrese el nombre de empleado">
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Apellido paterno</label>
-                                <input type="text" class="form-control" id="aPEmpleadoA">
+                                <input type="text" class="form-control" id="aPEmpleadoA" aria-label="ingrese el apellido paterno">
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Apellido materno</label>
-                                <input type="text" class="form-control" id="aMEmpleadoA">
+                                <input type="text" class="form-control" id="aMEmpleadoA" aria-label="ingrese el apellido materno">
                               </div>
                             <div class="mb-3">
                               <label for="" class="form-label">Correro electrónico</label>
-                              <input type="email" class="form-control" id="cEEmpleadoA" aria-describedby="emailHelp">
+                              <input type="email" class="form-control" id="cEEmpleadoA" aria-describedby="emailHelp" aria-label="ingrese el correo electronico">
                               <div id="emailHelp" class="form-text">
                                 Nunca compartiremos su correo electrónico con nadie más.</div>
                             </div>
                             <div class="mb-3">
                               <label for="" class="form-label">Dirección</label>
-                              <input type="text" class="form-control" id="dirEmpleadoA">
+                              <input type="text" class="form-control" id="dirEmpleadoA" aria-label="ingrese la direccion del empleado">
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Teléfono</label>
-                                <input type="text" class="form-control" id="telEmpleadoA">
+                                <input type="text" class="form-control" id="telEmpleadoA" aria-label="ingrese el telefono del empleado">
                               </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="passEmpleadoA">
+                                <input type="password" class="form-control" id="passEmpleadoA" aria-label="ingrese el password del empleado">
                             </div>
 
                                     
@@ -87,8 +87,8 @@
                           </form>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                      <button id="enviarEmpleado" type="button" class="btn btn-primary" onclick="mostrarAlertaEditar()" >Guardar</button>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar empleado</button>
+                      <button id="enviarEmpleado" type="button" class="btn btn-primary" onclick="mostrarAlertaEditar()" >Guardar empleado</button>
                     </div>
                   </div>
                 </div>
@@ -106,33 +106,33 @@
                         <form method="post">
                             <div class="mb-3">
                               <label for="" class="form-label">Nombre</label>
-                              <input type="text" class="form-control" name="edit" id="nombreEmpleado">
+                              <input type="text" class="form-control" name="edit" id="nombreEmpleado" aria-label="ingrese el nombre de empleado">
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Apellido paterno</label>
-                                <input type="text" class="form-control" name="edit" id="aPEmpleado">
+                                <input type="text" class="form-control" name="edit" id="aPEmpleado" aria-label="ingrese el apellido paterno del empleado">
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Apellido materno</label>
-                                <input type="text" class="form-control" name="edit" id="aMEmpleado">
+                                <input type="text" class="form-control" name="edit" id="aMEmpleado" aria-label="ingrese el apellido materno del empleado">
                               </div>
                             <div class="mb-3">
                               <label for="" class="form-label">Correro electrónico</label>
-                              <input type="email" class="form-control" name="edit" aria-describedby="emailHelp" id="cEEmpleado">
+                              <input type="email" class="form-control" name="edit" aria-describedby="emailHelp" id="cEEmpleado" aria-label="ingrese el correo electronico">
                               <div id="emailHelp" class="form-text">
                                 Nunca compartiremos su correo electrónico con nadie más.</div>
                             </div>
                             <div class="mb-3">
                               <label for="" class="form-label">Dirección</label>
-                              <input type="text" class="form-control" name="edit"  id="dirEmpleado">
+                              <input type="text" class="form-control" name="edit"  id="dirEmpleado" aria-label="ingrese la direccion de empleado">
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Teléfono</label>
-                                <input type="text" class="form-control" name="edit" id="telEmpleado">
+                                <input type="text" class="form-control" name="edit" id="telEmpleado" aria-label="ingrese el telefono del empleado">
                               </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Password</label>
-                                <input type="password" class="form-control" name="edit" id="passEmpleado">
+                                <input type="password" class="form-control" name="edit" id="passEmpleado" aria-label="ingrese el password del empleado">
                             </div>
                                                
                             
@@ -140,7 +140,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                      <button id="enviarEmpleadoEditar" type="button" class="btn btn-primary" >Guardar</button>
+                      <button id="enviarEmpleadoEditar" type="button" class="btn btn-primary" >Actualizar empleado</button>
                     </div>
                   </div>
                 </div>
