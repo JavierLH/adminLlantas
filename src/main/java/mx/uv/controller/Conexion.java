@@ -8,7 +8,7 @@ public class Conexion {
     private static String url = "jdbc:mysql://127.0.0.1:3306/adminLlantas";
     private static String DriverName = "com.mysql.jdbc.Driver";
     private static String username = "root";
-    private static String password = "123456789";
+    private static String password = "coches3";
     private static Connection connection = null;
 
     public static Connection getConnection(){

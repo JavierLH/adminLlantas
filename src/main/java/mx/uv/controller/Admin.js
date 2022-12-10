@@ -21,6 +21,14 @@ function Empleados_menu(){
     location.href = "/src/main/java/mx/uv/view/administrador/ev.html"   
 }
 
+function Provedores_menu(){
+    location.href = "/src/main/java/mx/uv/view/administrador/pv.html"   
+}
+
+function Sucursal_menu(){
+    location.href = "/src/main/java/mx/uv/view/administrador/sv.html"   
+}
+
 function btn_menu(){
     location.href = "/src/main/java/mx/uv/view/administrador/adminiatradorView.html"
 }

@@ -10,7 +10,7 @@ import com.google.gson.Gson;
 public class EmpleadoWS {
     public static Gson gson = new Gson();
     public static void main( String[] args ){
-        port(80);
+        port(1024);
         options("/*", (request, response) -> {
             String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
             if (accessControlRequestHeaders != null) {

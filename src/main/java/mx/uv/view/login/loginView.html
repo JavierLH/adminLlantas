@@ -7,6 +7,7 @@
     <script src="/target/classes/mx/uv/controller/Admin.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Login</title>
+    <link rel="shortcut icon" href="/src/main/java/mx/uv/view/img/Primera.png">
 </head>
 <body>
   <section class="h-screen">
@@ -61,7 +62,7 @@
       method :'POST'
 
     }
-    axios.get('http://localhost/obtenerUsuario')
+    axios.get('http://localhost:1024/obtenerUsuario')
     .then(response => {
       users = response.data; 
       console.log(users);
