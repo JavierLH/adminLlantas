@@ -53,4 +53,21 @@
         </div>
       </section>
 </body>
+<script>
+  var users;
+    //var cont = 0;
+    const tabla = document.querySelector('#cuerpo');
+    const opciones ={
+      method :'POST'
+
+    }
+    axios.get('http://localhost/obtenerUsuario')
+    .then(response => {
+      users = response.data; 
+      console.log(users);
+  })
+  .catch(e => {
+      console.log(e);
+  })
+</script>
 </html>

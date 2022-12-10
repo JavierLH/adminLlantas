@@ -16,6 +16,17 @@ public class Empleado {
     public Empleado(){
 
     }
+    public Empleado(Integer idEmpleado,String estatus){
+        this.idEmpleado=idEmpleado;
+        this.estatus = estatus;
+    }
+    public Empleado(Integer idEmpleado, String nombre, String password, String idRol){
+        this.idEmpleado=idEmpleado;
+        this.nombre =nombre;
+        this.password=password;
+        this.idRol=idRol;
+
+    }
     public Empleado(Integer idEmpleado, String nombre, String apellidoPaterno, String apellidoMaterno,
             String correoElectronico, String direccion, String telefono, String password, String estatus,String idRol) {
         this.idEmpleado = idEmpleado;

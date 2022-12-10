@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,6 +22,7 @@
                 <table id="tbDatosEmpleado" class="table table-dark table-striped">
                     <thead>
                     <tr>
+                      <th scope="col">ID</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellido Paterno</th>
                         <th scope="col">Apellido Materno</th>
@@ -34,6 +35,7 @@
                     </tr>
                     </thead>
                     <tbody id="cuerpo">
+
                     </tbody>
                 </table>
             </div>
@@ -49,51 +51,42 @@
                         <form>
                             <div class="mb-3">
                               <label for="" class="form-label">Nombre</label>
-                              <input type="text" class="form-control" id="nombreEmpleado">
+                              <input type="text" class="form-control" id="nombreEmpleadoA">
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Apellido paterno</label>
-                                <input type="text" class="form-control" id="aPEmpleado">
+                                <input type="text" class="form-control" id="aPEmpleadoA">
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Apellido materno</label>
-                                <input type="text" class="form-control" id="aMEmpleado">
+                                <input type="text" class="form-control" id="aMEmpleadoA">
                               </div>
                             <div class="mb-3">
                               <label for="" class="form-label">Correro electrónico</label>
-                              <input type="email" class="form-control" id="cEEmpleado" aria-describedby="emailHelp">
+                              <input type="email" class="form-control" id="cEEmpleadoA" aria-describedby="emailHelp">
                               <div id="emailHelp" class="form-text">
                                 Nunca compartiremos su correo electrónico con nadie más.</div>
                             </div>
                             <div class="mb-3">
                               <label for="" class="form-label">Dirección</label>
-                              <input type="text" class="form-control" id="dirEmpleado">
+                              <input type="text" class="form-control" id="dirEmpleadoA">
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Teléfono</label>
-                                <input type="text" class="form-control" id="telEmpleado">
+                                <input type="text" class="form-control" id="telEmpleadoA">
                               </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="passEmpleado">
+                                <input type="password" class="form-control" id="passEmpleadoA">
                             </div>
-                            <div class="mb-3">
-                                <label for="" class="form-label">Estatus</label>
-                                <input type="text" class="form-control" id="estatusEmpleado">
-                             </div> 
-                             <div class="mb-3">
-                              <label for="" class="form-label">Rol</label>
-                              <input type="text" class="form-control" id="estatusEmpleado">
 
-                           </div>        
-                           <div id="emailHelp" class="form-text">
-                            0 para administrador y 1 para empleado.</div>            
+                                    
                             
                           </form>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                      <button id="enviarEmpleado" type="button" class="btn btn-primary" onclick="mostrarAlerta()" >Guardar</button>
+                      <button id="enviarEmpleado" type="button" class="btn btn-primary" onclick="mostrarAlertaEditar()" >Guardar</button>
                     </div>
                   </div>
                 </div>
@@ -111,44 +104,41 @@
                         <form method="post">
                             <div class="mb-3">
                               <label for="" class="form-label">Nombre</label>
-                              <input type="text" class="form-control" id="nombreEmpleado">
+                              <input type="text" class="form-control" name="edit" id="nombreEmpleado">
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Apellido paterno</label>
-                                <input type="text" class="form-control" id="aPEmpleado">
+                                <input type="text" class="form-control" name="edit" id="aPEmpleado">
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Apellido materno</label>
-                                <input type="text" class="form-control" id="aMEmpleado">
+                                <input type="text" class="form-control" name="edit" id="aMEmpleado">
                               </div>
                             <div class="mb-3">
                               <label for="" class="form-label">Correro electrónico</label>
-                              <input type="email" class="form-control" id="cEEmpleado" aria-describedby="emailHelp">
+                              <input type="email" class="form-control" name="edit" aria-describedby="emailHelp" id="cEEmpleado">
                               <div id="emailHelp" class="form-text">
                                 Nunca compartiremos su correo electrónico con nadie más.</div>
                             </div>
                             <div class="mb-3">
                               <label for="" class="form-label">Dirección</label>
-                              <input type="text" class="form-control" id="dirEmpleado">
+                              <input type="text" class="form-control" name="edit"  id="dirEmpleado">
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Teléfono</label>
-                                <input type="text" class="form-control" id="telEmpleado">
+                                <input type="text" class="form-control" name="edit" id="telEmpleado">
                               </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="passEmpleado">
+                                <input type="password" class="form-control" name="edit" id="passEmpleado">
                             </div>
-                            <div class="mb-3">
-                                <label for="" class="form-label">Estatus</label>
-                                <input type="text" class="form-control" id="estatusEmpleado">
-                             </div>                    
+                                               
                             
                           </form>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                      <button id="enviarEmpleado" type="button" class="btn btn-primary" onclick="mostrarAlertaEditar()" >Guardar</button>
+                      <button id="enviarEmpleadoEditar" type="button" class="btn btn-primary" >Guardar</button>
                     </div>
                   </div>
                 </div>
@@ -179,6 +169,7 @@
 
 <script>
     var users;
+    //var cont = 0;
     const tabla = document.querySelector('#cuerpo');
     const opciones ={
       method :'POST'
@@ -189,7 +180,9 @@
       users = response.data;  
       users.forEach(element => {
         tabla.innerHTML += `
-                    <td scope="row" id="nom">${element.nombre}</td>
+                  <tr>
+                    <td id="idUser">${element.idEmpleado}</td>
+                    <td scope="row">${element.nombre}</td>
                     <td id="ap">${element.apellidoPaterno}</td>
                     <td id="am">${element.apellidoMaterno}</td>
                     <td id="ce">${element.correoElectronico}</td>
@@ -197,13 +190,16 @@
                     <td id="tel">${element.telefono}</td>
                     <td id="pas">${element.password}</td>
                     <td id="es">${element.estatus}</td>
-                    
-                    <td> 
+                  
+                    <th> 
                       <button id="ed" class="btn btn-warning " style="width: 100%;" data-bs-toggle="modal" data-bs-target="#editar">Editar</button>
-                      <button class="btn btn-danger" style="width: 100%;" data-bs-toggle="modal" data-bs-target="#eliminar" >Eliminar</button>
-                  </td>
+                      <button id="deleteEmpleado" class="btn btn-danger" style="width: 100%;">Eliminar</button>
+                    </th>
+                  </tr> 
   
         ` 
+
+
       });
       
   })
@@ -232,46 +228,164 @@
 } );
 
 
-  </script>
+</script>
 
 <script>
+  //para cargar los datos a el modal depende al evento seleccionado
+const datosTabla = document.getElementById('tbDatosEmpleado')
+//const datosTabla = document.querySelector('#cuerpo');
+const modalEditarEmpleado = document.getElementById('editar')
+const inputs = document.getElementsByName('edit')
+ let cont = 0
+let index =1
+
+window.addEventListener('click',(e)=>{
+  if (e.target.matches(".btn-warning")) {
+    let data =e.target.parentElement.parentElement.children;
+  //modalEditarEmpleado .classList.toggle('translate')
+  //fillData(data)
+    for (index of inputs) {   
+      index.value = data[cont].textContent
+      console.log(index)
+      cont+=1  
+    }
+  }
+  if (e.target.matches(".btn-secondary")) {
+    cont=0
+  }
+  if (e.target.matches(".btn-close")) {
+    cont=0
+  }
+})
+  //codigo para agregar nuevo empleado 
     var bEnviar = document.getElementById("enviarEmpleado");
     bEnviar.addEventListener ("click", function () {
-        let nombre = document.getElementById ("nombreEmpleado").value;
-        //let sa = document ("nombreEmpleado").value;
+        let nombre = document.getElementById ("nombreEmpleadoA").value;
+        let apellidoPaterno = document.getElementById ("aPEmpleadoA").value;
+        let apellidoMaterno= document.getElementById ("aMEmpleadoA").value;
+        let correoElectronico = document.getElementById ("cEEmpleadoA").value;
+        let direccion = document.getElementById ("dirEmpleadoA").value;
+        let telefono = document.getElementById ("telEmpleadoA").value;
+        let password= document.getElementById ("passEmpleadoA").value;
+        //let estatus = document.getElementById ("estatusEmpleadoA").value;
+        let estatus ="1"
+        let idRol ="1"
+        if (nombre !="" && apellidoPaterno !="" && apellidoMaterno!="" && correoElectronico!="" && direccion!="" && telefono!="" && password!="" && estatus!="" ) {
+          
+        
+          axios.post("http://localhost/", {
+              nombre : nombre,
+              apellidoPaterno: apellidoPaterno,
+              apellidoMaterno: apellidoMaterno,
+              correoElectronico: correoElectronico,
+              direccion: direccion,
+              telefono: telefono,
+              password : password,
+              estatus: estatus,
+              idRol:idRol
+          })
+          .then (function (respuesta) {
+              console.log(respuesta)
+              mostrarAlertaAgregarCorrecto()
+          })
+          .catch(function (error) {
+              console.log(error)
+              //mostrarAlertaAgregarCorrecto()
+          })
+        }else{
+           mostrarAlertaAgregarError()
 
+        }
+    })
+
+
+    //codigo para editar un empleado 
+    var btEditar = document.getElementById("enviarEmpleadoEditar");
+    btEditar.addEventListener ("click", function () {
+        let nombre = document.getElementById ("nombreEmpleado").value;
         let apellidoPaterno = document.getElementById ("aPEmpleado").value;
         let apellidoMaterno= document.getElementById ("aMEmpleado").value;
         let correoElectronico = document.getElementById ("cEEmpleado").value;
         let direccion = document.getElementById ("dirEmpleado").value;
         let telefono = document.getElementById ("telEmpleado").value;
         let password= document.getElementById ("passEmpleado").value;
-        let estatus = document.getElementById ("estatusEmpleado").value;
-        axios.post("http://localhost/", {
-            nombre : nombre,
-            apellidoPaterno: apellidoPaterno,
-            apellidoMaterno: apellidoMaterno,
-            correoElectronico: correoElectronico,
-            direccion: direccion,
-            telefono: telefono,
-            password : password,
-            estatus: estatus
-        })
-        .then (function (respuesta) {
-            console.log(respuesta)
-        })
-        .catch(function (error) {
-            console.log(error)
-        })
+        //let estatus = document.getElementById ("estatusEmpleadoA").value;
+        let estatus ="1"
+        let idRol ="1"
+        if (nombre !="" && apellidoPaterno !="" && apellidoMaterno!="" && correoElectronico!="" && direccion!="" && telefono!="" && password!="" && estatus!="" ) {
+          
+        
+          axios.post("http://localhost/actualiza", {
+              nombre : nombre,
+              apellidoPaterno: apellidoPaterno,
+              apellidoMaterno: apellidoMaterno,
+              correoElectronico: correoElectronico,
+              direccion: direccion,
+              telefono: telefono,
+              password : password,
+              estatus: estatus,
+              idRol:idRol
+          })
+          .then (function (respuesta) {
+              console.log(respuesta)
+              mostrarAlertaEditar()
+          })
+          .catch(function (error) {
+              console.log(error)
+              //mostrarAlertaAgregarCorrecto()
+          })
+        }else{
+           mostrarAlertaAgregarError()
+
+        }
+    })
+
+    //codigo para eliminar un empleado 
+
+  const datosTabla1 = document.getElementById('tbDatosEmpleado')
+  //let id = document.getElementById('idUser')
+  datosTabla1.addEventListener('click',(e)=>{
+    console.log(e.target.parentElement.parentElement.children[0].textContent)//aqui obtengo el id cada vez que doy clic en el boton
+
+   
+  })
+
+    var btEliminar = document.getElementById("deleteEmpleado");
+    btEliminar.addEventListener ("click", function () {
+      let idEmpleado = document.getElementById ("nombreEmpleado").value;
+        
+          axios.post("http://localhost/elimina", {
+             idEmpleado:idEmpleado
+              
+          })
+          .then (function (respuesta) {
+              console.log(respuesta)
+              mostrarAlertaEliminar()
+          })
+          .catch(function (error) {
+              console.log(error)
+              //mostrarAlertaAgregarCorrecto()
+          })
+        
     })
 
 
   
-    function mostrarAlertaAgregar(){
+    function mostrarAlertaAgregarCorrecto(){
       swal({
       title: "Listo",
       text: "Empleado agregado correctamente",
       icon: "success",
+      button: "Aceptar",
+      
+    });
+  }
+
+  function mostrarAlertaAgregarError(){
+      swal({
+      title: "Campos vacios",
+      text: "Llena todos los campos e intenta nuevamente",
+      icon: "warning",
       button: "Aceptar",
       
     });
@@ -286,6 +400,27 @@
       
     });
   }
+
+  function mostrarAlertaEliminar(){
+    swal({
+      title: "Todo bien",
+      text: "Empleado eliminado correctamente",
+      icon: "success",
+      button: "Aceptar",
+      
+    });
+  }
+
+  function mostrarAlertaEliminarError(){
+    swal({
+      title: "Algo salio mal",
+      text: "El empleado no se a podido eliminar correctamente",
+      icon: "warning",
+      button: "Aceptar",
+      
+    });
+  }
+
 </script>
 
 
