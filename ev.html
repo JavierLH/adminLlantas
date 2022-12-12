@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Empleados</title>
+    <link rel="shortcut icon" href="https://javierlh.github.io/Llantas-frontend/img/icono.png">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+              <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+              <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+              <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+              <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+              <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>   
+              <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+              <script async src="https://cdn.jsdelivr.net/npm/es-module-shims@1/dist/es-module-shims.min.js" crossorigin="anonymous"></script>
+              <script type="importmap">
+                          {
+                            "imports": {
+                              "@popperjs/core": "https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js",
+                              "bootstrap": "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.esm.min.js"
+                            }
+                          }
+              </script>
+              <script type="module">
+                          import * as bootstrap from 'bootstrap'
+                          new bootstrap.Popover(document.getElementById('popoverButton'))
+              </script>
+
+  </head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1>Administrar empleados</h1>
+                <button id="btndistinto" type="button" onclick="btn_menu()" class="btn btn-primary" data-bs-toggle="modal">Regresar</button>
+                <button id="btn" type="button"  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Nuevo empleado </button>
+            </div> 
+            <div class="card-body">
+                <table id="tbDatosEmpleado" class="table table-dark table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido Paterno</th>
+                        <th scope="col">Apellido Materno</th>
+                        <th scope="col">Correo Electrónico</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Contraseña</th>
+                        <th scope="col">Estatus</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody id="cuerpo">
+
+                    </tbody>
+                </table>
+            </div>
+             <!-- codigo del modal agregar empleado-->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Registrar nuevo empleado</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                              <label for="" class="form-label">Nombre</label>
+                              <input type="text" class="form-control" id="nombreEmpleadoA" aria-label="ingrese el nombre de empleado">
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Apellido paterno</label>
+                                <input type="text" class="form-control" id="aPEmpleadoA" aria-label="ingrese el apellido paterno">
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Apellido materno</label>
+                                <input type="text" class="form-control" id="aMEmpleadoA" aria-label="ingrese el apellido materno">
+                              </div>
+                            <div class="mb-3">
+                              <label for="" class="form-label">Correro electrónico</label>
+                              <input type="email" class="form-control" id="cEEmpleadoA" aria-describedby="emailHelp" aria-label="ingrese el correo electronico">
+                              <div id="emailHelp" class="form-text">
+                                Nunca compartiremos su correo electrónico con nadie más.</div>
+                            </div>
+                            <div class="mb-3">
+                              <label for="" class="form-label">Dirección</label>
+                              <input type="text" class="form-control" id="dirEmpleadoA" aria-label="ingrese la direccion del empleado">
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Teléfono</label>
+                                <input type="text" class="form-control" id="telEmpleadoA" aria-label="ingrese el telefono del empleado">
+                              </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="passEmpleadoA" aria-label="ingrese el password del empleado">
+                            </div>
+
+                                    
+                            
+                          </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar registro</button>
+                      <button id="enviarEmpleado" type="button" class="btn btn-primary">Guardar empleado</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- codigo del modal editar empleado-->
+              <div class="modal fade" id="editar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Editar empleado</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post">
+                            <div class="mb-3">
+                              <label for="" class="form-label">id</label>
+                              <input type="text" class="form-control" name="edit" id="idEmpleado" aria-label="id de empleado">
+                            </div>
+                            <div class="mb-3">
+                              <label for="" class="form-label">Nombre</label>
+                              <input type="text" class="form-control" name="edit" id="nombreEmpleado" aria-label="ingrese el nombre de empleado">
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Apellido paterno</label>
+                                <input type="text" class="form-control" name="edit" id="aPEmpleado" aria-label="ingrese el apellido paterno del empleado">
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Apellido materno</label>
+                                <input type="text" class="form-control" name="edit" id="aMEmpleado" aria-label="ingrese el apellido materno del empleado">
+                              </div>
+                            <div class="mb-3">
+                              <label for="" class="form-label">Correro electrónico</label>
+                              <input type="email" class="form-control" name="edit" aria-describedby="emailHelp" id="cEEmpleado" aria-label="ingrese el correo electronico">
+                              
+                            <div class="mb-3">
+                              <label for="" class="form-label">Dirección</label>
+                              <input type="text" class="form-control" name="edit"  id="dirEmpleado" aria-label="ingrese la direccion de empleado">
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Teléfono</label>
+                                <input type="text" class="form-control" name="edit" id="telEmpleado" aria-label="ingrese el telefono del empleado">
+                              </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Password</label>
+                                <input type="password" class="form-control" name="edit" id="passEmpleado" aria-label="ingrese el password del empleado">
+                            </div>
+                                               
+                            
+                          </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                      <button onclick="actualizar()" id="enviarEmpleadoEditar" type="button" class="btn btn-primary" >Actualizar empleado</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div> 
+</body>
+<script>
+
+$(document).ready( function () {
+    $('#tbDatosEmpleado').DataTable(
+        {
+    language: {
+        processing:     "Traitement en cours...",
+        search:         "Buscar :",
+        
+        paginate: {
+            first:      "Primero",
+            previous:   "Anterior",
+            next:       "Siguiente",
+            last:       "Anterior"
+        },
+       
+  }
+    }
+    );
+} );
+    var users;
+    //var cont = 0;
+    const tabla = document.querySelector('#cuerpo');
+    const opciones ={
+      method :'POST'
+    }
+    axios.get('https://adminllantas-backend-production.up.railway.app/empleados')
+    .then(response => {
+      users = response.data;  
+      users.forEach(element => {
+        tabla.innerHTML += `
+                  <tr>
+                    <td scope="row">${element.idEmpleado}</td>
+                    <td scope="row">${element.nombre}</td>
+                    <td id="ap">${element.apellidoPaterno}</td>
+                    <td id="am">${element.apellidoMaterno}</td>
+                    <td id="ce">${element.correoElectronico}</td>
+                    <td id="dir">${element.direccion}</td>
+                    <td id="tel">${element.telefono}</td>
+                    <td id="pas">${element.password}</td>
+                    <td id="es">${element.estatus}</td>
+                  
+                    <th> 
+                      <button id="ed" class="btn btn-warning " style="width: 100%;" data-bs-toggle="modal" data-bs-target="#editar">Editar</button>
+                      <button onclick="eliminaEmpleado()" id="deleteEmpleado" class="btn btn-danger" style="width: 100%;">Eliminar</button>
+                    </th>
+                  </tr> 
+  
+        ` 
+      });
+      
+  })
+  .catch(e => {
+      console.log(e);
+  })
+
+
+function btn_menu(){
+  window.location.href = "https://javierlh.github.io/Llantas-frontend/adminiatradorView.html";
+}
+</script>
+
+<script>
+  //para cargar los datos a el modal depende al evento seleccionado
+const datosTabla = document.getElementById('tbDatosEmpleado')
+//const datosTabla = document.querySelector('#cuerpo');
+const modalEditarEmpleado = document.getElementById('editar')
+const inputs = document.getElementsByName('edit')
+ let cont = 0
+let index =1
+
+window.addEventListener('click',(e)=>{
+  if (e.target.matches(".btn-warning")) {
+    let data =e.target.parentElement.parentElement.children;
+    for (index of inputs) {   
+      index.value = data[cont].textContent
+      console.log(index)
+      cont+=1  
+    }
+  }
+  if (e.target.matches(".btn-secondary")) {
+    cont=0
+  }
+  if (e.target.matches(".btn-close")) {
+    cont=0
+  }
+})
+  //codigo para agregar nuevo empleado 
+    var bEnviar = document.getElementById("enviarEmpleado");
+    bEnviar.addEventListener ("click", function () {
+        let nombre = document.getElementById ("nombreEmpleadoA").value;
+        let apellidoPaterno = document.getElementById ("aPEmpleadoA").value;
+        let apellidoMaterno= document.getElementById ("aMEmpleadoA").value;
+        let correoElectronico = document.getElementById ("cEEmpleadoA").value;
+        let direccion = document.getElementById ("dirEmpleadoA").value;
+        let telefono = document.getElementById ("telEmpleadoA").value;
+        let password= document.getElementById ("passEmpleadoA").value;
+        //let estatus = document.getElementById ("estatusEmpleadoA").value;
+        let estatus ="1"
+        let idRol ="1"
+        if (nombre !="" && apellidoPaterno !="" && apellidoMaterno!="" && correoElectronico!="" && direccion!="" && telefono!="" && password!="" && estatus!="" ) {
+          
+          axios.post("https://adminllantas-backend-production.up.railway.app/", {
+              nombre : nombre,
+              apellidoPaterno: apellidoPaterno,
+              apellidoMaterno: apellidoMaterno,
+              correoElectronico: correoElectronico,
+              direccion: direccion,
+              telefono: telefono,
+              password : password,
+              estatus: estatus,
+              idRol:idRol
+          })
+          .then (function (respuesta) {
+              console.log(respuesta)
+              mostrarAlertaAgregarCorrecto()
+          })
+          .catch(function (error) {
+              console.log(error)
+              //mostrarAlertaAgregarCorrecto()
+          })
+        }else{
+           mostrarAlertaAgregarError()
+
+        }
+    })
+
+    //codigo para editar un empleado 
+    function actualizar() {
+      let nombre = document.getElementById ("nombreEmpleado").value;
+        let apellidoPaterno = document.getElementById ("aPEmpleado").value;
+        let apellidoMaterno= document.getElementById ("aMEmpleado").value;
+        let correoElectronico = document.getElementById ("cEEmpleado").value;
+        let direccion = document.getElementById ("dirEmpleado").value;
+        let telefono = document.getElementById ("telEmpleado").value;
+        let password= document.getElementById ("passEmpleado").value;
+        //let estatus = document.getElementById ("estatusEmpleadoA").value;
+        let estatus ="1"
+        let idRol ="1"
+        if (nombre !="" && apellidoPaterno !="" && apellidoMaterno!="" && correoElectronico!="" && direccion!="" && telefono!="" && password!="" && estatus!="" ) {
+          axios.post("https://adminllantas-backend-production.up.railway.app/actualiza", {
+              nombre : nombre,
+              apellidoPaterno: apellidoPaterno,
+              apellidoMaterno: apellidoMaterno,
+              correoElectronico: correoElectronico,
+              direccion: direccion,
+              telefono: telefono,
+              password : password,
+              estatus: estatus,
+              idRol:idRol
+          })
+          .then (function (respuesta) {
+              console.log(respuesta)
+              mostrarAlertaEditar()
+          })
+          .catch(function (error) {
+              console.log(error)
+          })
+        }else{
+           mostrarAlertaAgregarError()
+
+        }
+    }
+
+    // var btEditar = document.getElementById("enviarEmpleadoEditar");
+    // btEditar.addEventListener ("click", function () {
+        // let nombre = document.getElementById ("nombreEmpleado").value;
+        // let apellidoPaterno = document.getElementById ("aPEmpleado").value;
+        // let apellidoMaterno= document.getElementById ("aMEmpleado").value;
+        // let correoElectronico = document.getElementById ("cEEmpleado").value;
+        // let direccion = document.getElementById ("dirEmpleado").value;
+        // let telefono = document.getElementById ("telEmpleado").value;
+        // let password= document.getElementById ("passEmpleado").value;
+        // //let estatus = document.getElementById ("estatusEmpleadoA").value;
+        // let estatus ="1"
+        // let idRol ="1"
+        // if (nombre !="" && apellidoPaterno !="" && apellidoMaterno!="" && correoElectronico!="" && direccion!="" && telefono!="" && password!="" && estatus!="" ) {
+        //   axios.post("https://adminllantas-backend-production.up.railway.app/actualiza", {
+        //       nombre : nombre,
+        //       apellidoPaterno: apellidoPaterno,
+        //       apellidoMaterno: apellidoMaterno,
+        //       correoElectronico: correoElectronico,
+        //       direccion: direccion,
+        //       telefono: telefono,
+        //       password : password,
+        //       estatus: estatus,
+        //       idRol:idRol
+        //   })
+        //   .then (function (respuesta) {
+        //       console.log(respuesta)
+        //       mostrarAlertaEditar()
+        //   })
+        //   .catch(function (error) {
+        //       console.log(error)
+        //   })
+        // }else{
+        //    mostrarAlertaAgregarError()
+
+        // }
+    //})
+
+
+    //codigo para eliminar un empleado 
+    function eliminaEmpleado() {
+      
+      let idEmpleado = document.getElementById("idEmpleado").value
+      axios.post("https://adminllantas-backend-production.up.railway.app/elimina", {
+             idEmpleado:idEmpleado 
+          })
+          .then (function (respuesta) {
+              console.log(respuesta)
+              mostrarAlertaEliminar()
+          })
+          .catch(function (error) {
+              console.log(error)
+              mostrarAlertaEliminarError()
+              //mostrarAlertaAgregarCorrecto()
+          })
+      
+      
+    }
+  
+
+    function mostrarAlertaAgregarCorrecto(){
+      swal({
+      title: "Listo",
+      text: "Empleado agregado correctamente",
+      icon: "success",
+      button: "Aceptar",
+      
+    });
+  }
+
+  function mostrarAlertaAgregarError(){
+      swal({
+      title: "Campos vacios",
+      text: "Llena todos los campos e intenta nuevamente",
+      icon: "warning",
+      button: "Aceptar",
+      
+    });
+  }
+
+  function mostrarAlertaEditar(){
+      swal({
+      title: "Listo",
+      text: "Los datos del empleado han sido editados correctamente",
+      icon: "success",
+      button: "Aceptar",
+      
+    });
+  }
+
+  function mostrarAlertaEliminar(){
+    swal({
+      title: "Todo bien",
+      text: "Empleado eliminado correctamente",
+      icon: "success",
+      button: "Aceptar",
+      
+    });
+  }
+
+  function mostrarAlertaEliminarError(){
+    swal({
+      title: "Algo salio mal",
+      text: "El empleado no se a podido eliminar correctamente",
+      icon: "warning",
+      button: "Aceptar",
+      
+    });
+  }
+
+</script>
+
+
+</html>
